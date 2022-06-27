@@ -119,6 +119,14 @@
                                             <div class="form-group" id="show-msg8"
                                                 style="display: none;font-size: 15px"></div>
                                         </div> --}}
+                                        <input type="hidden" class="form-control" placeholder="JJ/MM/AAAA"
+                                            id="in_date_birth" name="date_birth" value="<?php
+                                            if (empty($profil->date_birth)) {
+                                                echo '';
+                                            } else {
+                                                echo $profil->date_birth;
+                                            }
+                                            ?>" required>
                                         <div class="form-group col-6">
                                             <label for="inputPhone4">Téléphone <span
                                                     class="obli">*</span></label>

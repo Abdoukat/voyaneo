@@ -96,7 +96,6 @@
 
 
     /** star  end*/
-
 </style>
 <div class="top-nav">
     <div class="container">
@@ -164,6 +163,7 @@ $count = count($date_all);
                 <div class="breadcrumb-text">
                     <h2 class="ligne">{{ $product_detail->titre }}</h2>
 
+
                 </div>
                 <div class="room-details-item">
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -213,17 +213,14 @@ $count = count($date_all);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ville as $item)
-                                        @foreach ($date_all as $date)
-                                            @for ($i = 0; $i < $count; $i++)
-                                                <tr>
-                                                    <th scope="row">{{ $item }}</th>
-                                                    <td>{{ $date }}</td>
-                                                    <td>3 jours</td>
-                                                    <td style="color: red">{{ $prix_dates[$i] }}</td>
-                                                </tr>
-                                            @endfor
-                                        @endforeach
+
+                                    @foreach ($offre as $item)
+                                        <tr>
+                                            <th scope="row">{{ $item->name }}</th>
+                                            <td>{{ $item->date }}</td>
+                                            <td>3 jours</td>
+                                            <td style="color: red">{{ $item->prix }}</td>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>
@@ -303,32 +300,35 @@ $count = count($date_all);
                     <form action="{{ route('add.avis') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <fieldset class="rating mt-3">
-                            <input type="radio" id="star5" name="star" value="5" /><label class="full"
-                                for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="star" value="4 and a half" /><label
-                                class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="star" value="4" /><label class="full"
-                                for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="star" value="3 and a half" /><label
-                                class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="star" value="3" /><label class="full"
-                                for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="star" value="2 and a half" /><label
-                                class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="star" value="2" /><label class="full"
-                                for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="star" value="1 and a half" /><label
-                                class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="star" value="1" /><label class="full"
-                                for="star1" title="Sucks big time - 1 star"></label>
+                            <input type="radio" id="star5" name="star" value="5" required /><label
+                                class="full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4half" name="star" value="4 and a half"
+                                required /><label class="half" for="star4half"
+                                title="Pretty good - 4.5 stars"></label>
+                            <input type="radio" id="star4" name="star" value="4" required /><label
+                                class="full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3half" name="star" value="3 and a half"
+                                required /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                            <input type="radio" id="star3" name="star" value="3" required /><label
+                                class="full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2half" name="star" value="2 and a half"
+                                required /><label class="half" for="star2half"
+                                title="Kinda bad - 2.5 stars"></label>
+                            <input type="radio" id="star2" name="star" value="2" required /><label
+                                class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1half" name="star" value="1 and a half"
+                                required /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                            <input type="radio" id="star1" name="star" value="1" required /><label
+                                class="full" for="star1" title="Sucks big time - 1 star"></label>
 
                         </fieldset>
                         <input type="hidden" class="form-control mb-3" name="email" placeholder="Nom et Prénom"
-                            aria-label="Username" aria-describedby="basic-addon1" value="{{ Auth::user()->name }}">
+                            aria-label="Username" aria-describedby="basic-addon1"
+                            value="{{ Auth::user()->name }}">
 
 
-                        <textarea class="form-control mb-3" aria-label="With textarea" name="message" id="" cols="80px" rows="10"
-                            placeholder="votre commentaire"></textarea>
+                        <textarea class="form-control mb-3" aria-label="With textarea" name="message" id="" cols="80px"
+                            rows="10" placeholder="votre commentaire" required></textarea>
                         <button type="submit" class="btn btn-outline-info btn-block"><i class="fa fa-paper-plane"
                                 aria-hidden="true"></i></button>
                     </form>
@@ -347,8 +347,8 @@ $count = count($date_all);
                     <form action="{{ url('cart/add') }}" method="post">
                         @csrf
                         <input type="text" value="{{ $image[0] }}" name="image" hidden>
-                        <input type="text" value="{{ $product_detail->short_description }}" name="short_description"
-                            hidden>
+                        <input type="text" value="{{ $product_detail->short_description }}"
+                            name="short_description" hidden>
                         <input type="text" value="{{ $product_detail->slug }}" name="slug" hidden>
                         <input type="text" value="{{ $product_detail->titre }}" name="titre" hidden>
                         <input type="text" value="{{ $product_detail->prix_ini }}" name="prix_ini" hidden>
@@ -362,30 +362,18 @@ $count = count($date_all);
                                 <div class="select-option col-12">
 
                                     <label for="guest">Ville de départ:</label>
-                                    <select id="adulte" name="adulte" class="mb-3">
+                                    <select id="city" name="city" class="mb-3" onchange="cityChange()">
 
-
-
-                                        @foreach ($ville as $item)
-                                            <option value="1">{{ $item }}</option>
+                                        @foreach ($offre as $item)
+                                            <option value="{{ $item->city_id }}">{{ $item->name }}</option>
                                         @endforeach
-
-
-
+                                        <input type="hidden" name="var1" value="23">
 
                                     </select>
 
                                     <label for="room">Choisir une date :</label>
                                     <select id="date" onChange="myNewFunction()">
                                         <option selected value="0">📅 Dates disponibles </option>
-
-
-                                        @for ($i = 0; $i < $count; $i++)
-                                            <option value="{{ $prix_dates[$i] }}">{{ $date_all[$i] }}</option>
-                                        @endfor
-
-
-
 
 
 
@@ -395,29 +383,22 @@ $count = count($date_all);
                                     <div id="show_msg" style="font-size: 15px"></div>
                                 </div>
 
-
-
-
-
-
                                 <input type="text" id="trans_first" name="trans_first"
                                     value="{{ $product_detail->trans }}" hidden>
-
-
 
                                 <div class="select-option col-12" id="champ" style="display: none">
 
                                     <label for="checkbox">Vol :</label>
                                     <div class="form-check ml-3">
-                                        <input class="form-check-input" type="radio" name="vol" id="flexRadioDefault1"
-                                            value="{{ $product_detail->bus }}">
+                                        <input class="form-check-input" type="radio" name="vol"
+                                            id="flexRadioDefault1" value="{{ $product_detail->bus }}">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Business
                                         </label>
                                     </div>
                                     <div class="form-check ml-3">
-                                        <input class="form-check-input" type="radio" name="vol" id="flexRadioDefault2"
-                                            value="{{ $product_detail->eco }}" checked>
+                                        <input class="form-check-input" type="radio" name="vol"
+                                            id="flexRadioDefault2" value="{{ $product_detail->eco }}" checked>
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Econnomique
                                         </label>
@@ -443,7 +424,8 @@ $count = count($date_all);
                                 </div>
 
                                 <div class="select-option col-12">
-                                    <label for="guest">Voyageurs: <span style="color: #ce9a67"> (âge entre 5 ans et 11
+                                    <label for="guest">Voyageurs: <span style="color: #ce9a67"> (âge entre 5 ans et
+                                            11
                                             ans)</span></label>
                                     <select id="enfant" name="enfant">
                                         <option selected value="0">Enfant </option>
@@ -487,8 +469,8 @@ $count = count($date_all);
                                         </label>
                                     </div>
                                     <div class="form-check ml-3">
-                                        <input class="form-check-input" type="radio" value="0" name="flexRadioDefault"
-                                            id="null_assur" checked>
+                                        <input class="form-check-input" type="radio" value="0"
+                                            name="flexRadioDefault" id="null_assur" checked>
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             AUCUNE ASSURANCE <span style="color: red">0,00 €</span>
                                         </label>
@@ -585,6 +567,8 @@ $count = count($date_all);
             </div>
         </div>
     </div>
+
+    <input id="do_change" type="hidden" value="" />
 
 </section>
 
@@ -734,5 +718,40 @@ $count = count($date_all);
         var text = sel.options[sel.selectedIndex].text;
 
         var date = document.getElementById('date_dispo').value = text;
+    }
+</script>
+<script>
+    function cityChange() {
+
+        var do_change = document.getElementById('do_change').value;
+        if (do_change == '') {
+            do_change = 'ok';
+            const city = document.getElementById('city').value;
+            //alert(city);
+            $.ajax({
+                url: '/offre/' + city, //This is the current doc
+                type: "GET",
+                data: ({}),
+                success: function(response) {
+                    console.log('yes !!');
+                    console.log(JSON.parse(response));
+                    var data = JSON.parse(response);
+                    document.getElementById('date').innerHTML =
+                        '<option selected="" value="0">📅 Dates disponibles </option>';
+                    for (i = 0; i < data.length; i++) {
+                        document.getElementById('date').innerHTML = document.getElementById('date')
+                            .innerHTML +
+                            `<option value="` + data[i]['prix'] + `">` + data[i]['date'] + `</option>`;
+                    }
+                    // $('#date').change();
+                    $("select").niceSelect('update');
+                    //location.reload();
+                }
+            });
+        } else {
+            do_change = '';
+        }
+
+
     }
 </script>

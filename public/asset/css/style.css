@@ -2752,4 +2752,6 @@ input[type="date"] {
 .back_page:hover{
       color: #d17b25;
 }
-
+.nice-select {
+    width: auto;
+}
